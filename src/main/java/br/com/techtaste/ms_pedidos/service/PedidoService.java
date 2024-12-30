@@ -1,9 +1,16 @@
 package br.com.techtaste.ms_pedidos.service;
 
+import br.com.techtaste.ms_pedidos.dto.PedidoRequestDto;
 import br.com.techtaste.ms_pedidos.dto.PedidoResponseDto;
+import br.com.techtaste.ms_pedidos.model.Pedido;
+import br.com.techtaste.ms_pedidos.model.Status;
+import br.com.techtaste.ms_pedidos.repository.PedidoRepository;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class PedidoService {
@@ -13,7 +20,7 @@ public class PedidoService {
         this.repository = repository;
     }
 
-    public PedidoResponseDto cadastrarPedido(PedidoRequestDto pedidoDto, boolean erro) {
+    public PedidoResponseDto cadastrarPedido(PedidoRequestDto pedidoDto) {
         Pedido pedido = new Pedido();
         BeanUtils.copyProperties(pedidoDto, pedido);
         Status status = Status.AGUARDANDO_PAGAMENTO;
